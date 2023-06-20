@@ -1,0 +1,343 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    padding: 0;
+    margin: 0;
+
+    font-family: Helvetica, sans-serif;
+}
+
+.stopScrolling {
+    overflow: hidden;
+}
+
+.gallery{
+    padding: 5em 1em 0 1.5em;
+}
+
+.galleryDark{
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    padding-top: 100px; /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.9); /* Black w/ opacity */
+}
+
+.gallery-top{
+    display:flex;
+    justify-content: space-between;
+}
+
+.searchHeader{
+    margin: 0;
+    align-self: center;
+}
+
+.highlight{
+    padding: 0 1em 0 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+#container {
+    display: grid;
+
+    grid-template-columns: 
+    [one] 20% 
+    [two] 20%
+    [three] 20%
+    [four] 20%
+    [five] 20%;
+
+    /*SUPER IMPORTANT*/
+    align-items: flex-start; /*Aligns items at the start of the cross-axis*/
+    flex-wrap: wrap;
+}
+
+.artPiece {
+    border: 1px solid black;
+    border-radius: 12px;
+    padding: 1em;
+    margin: 0 1em 1em 0;
+}
+
+.myImg {
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.3s;
+    width: 100% /* Fills the width of artPiece*/
+}
+
+.myImg:hover {
+    opacity: 0.7;
+}
+
+.artHeader {
+    word-wrap: normal;
+}
+
+.medium{
+    font-style: italic;
+    word-wrap: normal;
+} 
+
+.artist {
+    word-wrap: normal;
+}
+
+.sidebar{
+    display: none;
+    overflow: auto;
+    height: 100%;
+    width: 15%;
+    padding: 3em 0 0 0;
+    background-color: #f2f2f2;
+
+    z-index: 2;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+}
+
+.sidebar h2{
+    padding: 0 0 0 9px;
+    margin-top: 25px;
+    margin-bottom: 5px;
+}
+
+.sidebarButton{
+    display:block;
+    width:100%;
+    text-decoration: none;
+    border-bottom: 1px solid #ccc!important;
+    padding: 1em;
+    cursor: pointer;
+    color:black;
+}
+
+.active, .sidebarButton:hover{
+    text-decoration: none;
+    background-color: #e4002b;
+    color: white;
+}
+
+.header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+
+    background-color: #e4002b;
+
+    height: 6rem;
+
+    padding: 0 16px;
+
+    z-index: 3;
+}
+
+.webBurger {
+    /* display: flex; */
+    /* align-items: center; */
+}
+
+.iconButton {
+    color: white;
+    background-color:#e4002b;
+    border: none;
+}
+
+.glyphicon {
+    font-size: 28px; 
+    margin: 3px 0 0 0;
+}
+
+.webName{
+    font-family: "Playfair Display";
+    font-size: 2.5rem;
+    font-weight: bold;
+
+    color:white;
+}
+
+.searchbar{
+    display: flex;
+    align-items: center;
+}
+
+#myInput{
+    height: 30px;
+    width: 300px;
+    max-width: 300px;
+    margin: 0 1em 0 0;
+}
+
+
+
+/* The Modal (background) */
+.myModal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    padding-top: 100px; /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.9); /* Black w/ opacity */
+}
+  
+/* Modal Content (image) */
+.modal-content {
+    margin: auto;
+    display: block;
+    width: 80%;
+    max-width: 700px;
+}
+
+/* Caption of Modal Image */
+#caption {
+    margin: auto;
+    display: block;
+    width: 80%;
+    max-width: 700px;
+    text-align: center;
+    color: #ccc;
+    padding: 10px 0;
+    height: 150px;
+}
+
+/* Add Animation */
+.modal-content, #caption {  
+    animation-name: zoom;
+    animation-duration: 0.6s;
+}
+
+@keyframes zoom {
+    from {transform: scale(0.1)} 
+    to {transform: scale(1)}
+}
+
+/* The Close Button */
+.close {
+    position: absolute;
+    top: 15px;
+    right: 35px;
+    color: #f1f1f1;
+    font-size: 40px;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.close:hover,
+.close:focus {
+    color: #bbb;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+/* 100% Image Width on Smaller Screens */
+@media only screen and (max-width: 700px){
+    .modal-content {
+        width: 100%;
+    }
+}
+
+
+
+/* The switch - the box around the slider */
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 34px;
+    margin: 0 0 0 1em;
+}
+  
+/* Hide default HTML checkbox */
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+  
+/* The slider */
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+  
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 26px;
+    width: 26px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+  
+input:checked + .slider {
+    background-color: #cd0027;
+}
+  
+input:checked + .slider:before {
+    -webkit-transform: translateX(26px);
+    -ms-transform: translateX(26px);
+    transform: translateX(26px);
+}
+  
+  /* Rounded sliders */
+.slider.round {
+    border-radius: 34px;
+}
+  
+.slider.round:before {
+    border-radius: 50%;
+}
+
+.w3-animate-right{
+    animation:animateright 0.4s
+}
+
+@keyframes animateright{
+    from{right:-300px; opacity:0} 
+    to{right:0; opacity:1}
+}
+
+.w3-animate-left{
+    animation: animateleft 0.4s;
+    animation-direction: normal;
+}
+
+@keyframes animateleft{
+    0% {
+        left: -300px; 
+        opacity: 0;
+    } 
+    100% {
+        left: 0; 
+        opacity: 1;
+    }
+}
