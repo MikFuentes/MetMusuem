@@ -4,9 +4,9 @@ This is an interactable webpage that displays artworks from [The Metropolitan Mu
 Navigating the 470,000+ artworks in the museum's collection is made easier thanks to the interface's features listed below.
 
 ## Features
-- Modal Image Previews which allow users to view each artpiece in full HD resolution 
-- Hideable Sidebar which allow users to select and view artwork from specific collections
-- Searchbar which filters artworks according to the given keyword(s)
-- Highlight Filter which will only display the most popular artworks in the collection
+- **Modal Image Previews:** View each artpiece in full HD resolution 
+- **Hideable Sidebar:** Select and view artwork from specific collections
+- **Searchbar:** Filter artworks according to the given keyword(s)
+- **Highlight Filter:** Display the most popular artworks in the collection
 
 ## [Visit the website here!](https://mikfuentes.github.io/MetMusuem/)
