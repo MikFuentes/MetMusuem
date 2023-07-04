@@ -3,25 +3,12 @@
 // Make department hamburger
 
 // Returns the array of object IDs updated after May 2021 (22534 objects)
-// function requestObjects() {
-//     return fetch(`https://collectionapi.metmuseum.org/public/collection/v1/objects?metadataDate=2021-05-01`).then(response => {
-//         return response.json()
-//     }).then(responseBody => {
-//         return responseBody
-//     })
-// }
-
-async function requestObjects() {
-    try {
-        const url = `https://collectionapi.metmuseum.org/public/collection/v1/objects?metadataDate=2021-05-01`
-        const response = await fetch(url)
-        const data = await response.json()
-        console.log(data['total'])
-        return data
-    }
-    catch (error) {
-        error => console.error(error)
-    }
+function requestObjects() {
+    return fetch(`https://collectionapi.metmuseum.org/public/collection/v1/objects?metadataDate=2021-05-01`).then(response => {
+        return response.json()
+    }).then(responseBody => {
+        return responseBody
+    })
 }
 
 // Returns the array of departments
@@ -78,28 +65,13 @@ function searchHighlightedObjectsFromDepartment(departmentId, query) {
     })
 }
 
-// // Returns the specified Object according to an ID
-// function requestObject(objectID) {
-//     return fetch(`https://collectionapi.metmuseum.org/public/collection/v1/objects/${objectID}`).then(response => {
-//         return response.json()
-//     }).then(responseBody => {
-//         return responseBody
-//     })
-// }
-
 // Returns the specified Object according to an ID
-async function requestObject(objectID) {
-    try {
-        const url = `https://collectionapi.metmuseum.org/public/collection/v1/objects/${objectID}`
-        const response = await fetch(url)
-        const data = await response.json()
-        console.log(data)
-        console.log(data['objectID'])
-        return data
-    }
-    catch (error) {
-        error => console.error(error)
-    }
+function requestObject(objectID) {
+    return fetch(`https://collectionapi.metmuseum.org/public/collection/v1/objects/${objectID}`).then(response => {
+        return response.json()
+    }).then(responseBody => {
+        return responseBody
+    })
 }
 
 // Removes the images on the screen
@@ -236,13 +208,11 @@ function toggleSidebar(){
     sidebarOn = !sidebarOn
 
     if(sidebarOn){
-        document.querySelector(".w3-animate-left").style.animationDirection = "normal"
         document.querySelector(".sidebar").style.display = "block"
         document.querySelector(".galleryDark").style.display = "block"
     }
     else{
-        document.querySelector(".w3-animate-left").style.animationDirection = "reverse"
-        // document.querySelector(".sidebar").style.display = "none"
+        document.querySelector(".sidebar").style.display = "none"
         document.querySelector(".galleryDark").style.display = "none"
         //document.querySelector(".sidebar").classList.replace("w3-animate-left", "w3-animate-right")
     }
@@ -362,25 +332,14 @@ function getTenArt(objectArray, isRandom, startIndex, query = "") {
         }
         else {
             console.log("Loading complete.")
-            if (!highlightOn) {
-                var temp = "Showing " + response + " out of " + 
-                MAX.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + " result(s)"
-            }
-            else { 
-                var temp = "Found " + response + " highlighted result(s)" 
-            }
+            if (!highlightOn) { var temp = "Showing " + response + " out of " + MAX.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + " result(s)" }
+            else { var temp = "Found " + response + " highlighted result(s)" }
 
             if (response <= 0) {
-                if (!highlightOn) {
-                    var temp = "No results found" 
-                }
-                else {
-                    var temp = "No highlighted results found" 
-                }
+                if (!highlightOn) { var temp = "No results found" }
+                else { var temp = "No highlighted results found" }
             }
-            if (query != "") {
-                temp += " for: " + query 
-            }
+            if (query != "") { temp += " for: " + query }
             document.querySelector('.searchResult').innerHTML = temp
         }
     }).catch(error => { console.log(error) })
@@ -412,10 +371,10 @@ document.getElementById("myModal").addEventListener("click", function (e) {
 /*------DEFAULT LOAD------*/
 
 // Add departments to the sidebar
-// addDepartmentsToDocument()
+addDepartmentsToDocument()
 
-// // Generate 10 random artworks
-// requestObjects().then(allObjects => {
-//     document.querySelector(".searchHeader").innerHTML = "Recently Updated Artwork"
-//     getTenArt(allObjects, true, 0)
-// })
+// Generate 10 random artworks
+requestObjects().then(allObjects => {
+    document.querySelector(".searchHeader").innerHTML = "Recently Updated Artwork"
+    getTenArt(allObjects, true, 0)
+})
