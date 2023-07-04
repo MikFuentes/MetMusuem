@@ -1,6 +1,11 @@
-body, html {
-    height: 100%;
-    margin: 0.5em;
+* {
+    box-sizing: border-box;
+}
+
+body {
+    padding: 0;
+    margin: 0;
+
     font-family: Helvetica, sans-serif;
 }
 
@@ -126,44 +131,43 @@ body, html {
     color: white;
 }
 
-.topbar{
-    height: 56px;
+.header {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
+
     background-color: #e4002b;
+
+    height: 6rem;
+
     padding: 0 16px;
 
-    z-index: 2;
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
+    z-index: 3;
 }
 
-.webBurger{
-    display: flex;
-    align-items: center;
+.webBurger {
+    /* display: flex; */
+    /* align-items: center; */
 }
 
-.iconButton{
-    border: none;
-    background-color:#e4002b;
+.iconButton {
     color: white;
+    background-color:#e4002b;
+    border: none;
 }
 
-.glyphicon{
+.glyphicon {
     font-size: 28px; 
     margin: 3px 0 0 0;
 }
 
 .webName{
-    color:white;
     font-family: "Playfair Display";
-    font-size: large;
+    font-size: 2.5rem;
     font-weight: bold;
-    margin: 0 0 0 1em;
+
+    color:white;
 }
 
 .searchbar{
@@ -323,10 +327,17 @@ input:checked + .slider:before {
 }
 
 .w3-animate-left{
-    animation:animateleft 0.4s
+    animation: animateleft 0.4s;
+    animation-direction: normal;
 }
 
 @keyframes animateleft{
-    from{left:-300px;opacity:0} 
-    to{left:0;opacity:1}
+    0% {
+        left: -300px; 
+        opacity: 0;
+    } 
+    100% {
+        left: 0; 
+        opacity: 1;
+    }
 }
