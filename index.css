@@ -90,7 +90,7 @@ body, html {
 }
 
 .sidebar{
-    display: none;
+    display: block;
     overflow: auto;
     height: 100%;
     width: 15%;
@@ -100,7 +100,7 @@ body, html {
     z-index: 2;
     position: fixed;
     top: 0;
-    left: 0;
+    left: -300px;
     right: 0;
 }
 
@@ -314,19 +314,21 @@ input:checked + .slider:before {
 }
 
 .w3-animate-right{
-    animation:animateright 0.4s
+    animation:animateright 0.4s;
+    left: 0px;
 }
 
 @keyframes animateright{
-    from{right:-300px; opacity:0} 
-    to{right:0; opacity:1}
+    from{left:-300px; opacity:0} 
+    to{left:0px; opacity:1}
 }
 
 .w3-animate-left{
-    animation:animateleft 0.4s
+    animation:animateleft 0.4s;
+    left:-300px;
 }
 
 @keyframes animateleft{
-    from{left:-300px;opacity:0} 
-    to{left:0;opacity:1}
+    from{left:0px; opacity:1} 
+    to{left:-300px; opacity:0}
 }
