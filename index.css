@@ -1,7 +1,23 @@
+:root {
+    --transition-sidebar: 0.4s;
+    --font-responsive: 0.390625vw;
+    --size-sidebar: 400px;
+    --left-sidebar: calc(var(--size-sidebar)*-1)
+}
+
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
 body, html {
     height: 100%;
-    margin: 0.5em;
     font-family: Helvetica, sans-serif;
+    display: flex;
+    flex-direction: column;
+}
+
+body:first-child {
+    border:10px;
 }
 
 .stopScrolling {
@@ -9,13 +25,15 @@ body, html {
 }
 
 .gallery{
-    padding: 5em 1em 0 1.5em;
+    /* padding: 5em 1em 0 1.5em; */
+
 }
 
 .galleryDark{
-    display: none; /* Hidden by default */
+    display: block; /* Hidden by default */
     position: fixed; /* Stay in place */
     z-index: 1; /* Sit on top */
+    opacity: 0;
     padding-top: 100px; /* Location of the box */
     left: 0;
     top: 0;
@@ -23,7 +41,27 @@ body, html {
     height: 100%; /* Full height */
     overflow: auto; /* Enable scroll if needed */
     background-color: rgb(0,0,0); /* Fallback color */
-    background-color: rgba(0,0,0,0.9); /* Black w/ opacity */
+    background-color: rgba(0,0,0,0.7); /* Black w/ opacity */
+}   
+
+.fadeIn {
+    animation: fadeIn var(--transition-sidebar); 
+    opacity: 1;
+}
+
+.fadeOut{
+    animation: fadeOut var(--transition-sidebar);
+    opacity: 0;
+}
+
+@keyframes fadeIn {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+}
+
+@keyframes fadeOut {
+    0% { opacity: 1; }
+    100% { opacity: 0; }
 }
 
 .gallery-top{
@@ -92,22 +130,18 @@ body, html {
 .sidebar{
     display: block;
     overflow: auto;
-    height: 100%;
-    width: 15%;
-    padding: 3em 0 0 0;
+    height: 90%;
+    width: fit-content;
+    margin: 5.5em 0 0 0;
     background-color: #f2f2f2;
 
     z-index: 2;
     position: fixed;
-    top: 0;
-    left: -300px;
-    right: 0;
+    left: var(--left-sidebar);
 }
 
 .sidebar h2{
-    padding: 0 0 0 9px;
-    margin-top: 25px;
-    margin-bottom: 5px;
+    margin-left: 4rem;
 }
 
 .sidebarButton{
@@ -115,7 +149,7 @@ body, html {
     width:100%;
     text-decoration: none;
     border-bottom: 1px solid #ccc!important;
-    padding: 1em;
+    padding: 1em 3em;
     cursor: pointer;
     color:black;
 }
@@ -126,65 +160,11 @@ body, html {
     color: white;
 }
 
-.topbar{
-    height: 56px;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    background-color: #e4002b;
-    padding: 0 16px;
-
-    z-index: 2;
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-}
-
-.webBurger{
-    display: flex;
-    align-items: center;
-}
-
-.iconButton{
-    border: none;
-    background-color:#e4002b;
-    color: white;
-}
-
-.glyphicon{
-    font-size: 28px; 
-    margin: 3px 0 0 0;
-}
-
-.webName{
-    color:white;
-    font-family: "Playfair Display";
-    font-size: large;
-    font-weight: bold;
-    margin: 0 0 0 1em;
-}
-
-.searchbar{
-    display: flex;
-    align-items: center;
-}
-
-#myInput{
-    height: 30px;
-    width: 300px;
-    max-width: 300px;
-    margin: 0 1em 0 0;
-}
-
-
-
 /* The Modal (background) */
 .myModal {
     display: none; /* Hidden by default */
     position: fixed; /* Stay in place */
-    z-index: 1; /* Sit on top */
+    z-index: 4; /* Sit on top */
     padding-top: 100px; /* Location of the box */
     left: 0;
     top: 0;
@@ -314,21 +294,23 @@ input:checked + .slider:before {
 }
 
 .w3-animate-right{
-    animation:animateright 0.4s;
+    animation:animateright var(--transition-sidebar);
     left: 0px;
+    display: block;
 }
 
 @keyframes animateright{
-    from{left:-300px; opacity:0} 
-    to{left:0px; opacity:1}
+    from{left:var(--left-sidebar)} 
+    to{left:0px;}
 }
 
 .w3-animate-left{
-    animation:animateleft 0.4s;
-    left:-300px;
+    animation:animateleft var(--transition-sidebar);
+    left:var(--left-sidebar);
+    
 }
 
 @keyframes animateleft{
-    from{left:0px; opacity:1} 
-    to{left:-300px; opacity:0}
+    from{left:0px;} 
+    to{left:var(--left-sidebar);}
 }

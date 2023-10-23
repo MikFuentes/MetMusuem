@@ -1,0 +1,79 @@
+:root {
+    --transition-sidebar: 0.4s;
+    --font-responsive: 0.390625vw;
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+body,
+html {
+    height: 100%;
+    font-family: Helvetica, sans-serif;
+    display: flex;
+    flex-direction: column;
+}
+
+body:first-child {
+    border: 10px;
+}
+
+.topbar {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+
+    height: auto;
+    background-color: #e4002b;
+
+    z-index: 3;
+    padding: 5px 0;
+}
+
+.topbar * {
+    /* background: blue; */
+    margin: 10px;
+}
+
+.webName {
+    color: white;
+    font-family: "Playfair Display";
+    /* font-size: large; */
+    font-size: calc(28px + var(--font-responsive));
+    font-weight: bold;
+
+    text-wrap: nowrap;
+}
+
+.searchbar {
+    display: flex;
+    align-items: center;
+}
+
+.searchbar * {
+    margin: 0;
+}
+
+#myInput {
+    min-height: 30px;
+    min-width: 200px;
+}
+
+.iconButton {
+    display: flex;
+    border: none;
+    background-color: #e4002b;
+    color: white;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 15px;
+    margin: 0;
+}
+
+.glyphicon {
+    font-size: calc(26px + var(--font-responsive));
+    margin: 0;
+}

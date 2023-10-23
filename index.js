@@ -1,4 +1,5 @@
-const DATE = `2021-05-01`
+// const DATE = `2021-05-01`
+const DATE = `2023-10-21`
 
 // ------ FRONT-END -------
 // TODO:
@@ -30,6 +31,40 @@ function clearScreen() {
     }
     // prevImage = null
     counter = 0
+}
+
+function createModal(){
+    let modal = document.createElement('div')
+    modal.className = 'myModal'
+    modal.id = 'myModal'
+
+    let close = document.createElement('span')
+    close.className = 'close'
+    close.addEventListener('click', () => closeModal())
+
+    let img = document.createElement('img')
+    img.className = 'modal-content'
+    img.id = 'img01'
+
+    let caption = document.createElement('div')
+    caption.id = 'caption'
+    
+    modal.append(close, img, caption)
+    return modal
+}
+
+// Opens the modal
+function openModal() {
+    document.querySelector("body").classList.add("stopScrolling")
+    let modal = createModal()
+
+    // let modal = document.getElementById('myModal'); 
+    modal.style.display = "block";
+    modal.style.overflow = "auto";
+    modal.img = this.src;
+    modal.caption = this.alt;
+
+    document.body.append(modal)
 }
 
 // Closes the modal
@@ -67,14 +102,7 @@ function addImageToDocument(image, imageSmall, title, medium, artistDisplayName,
 
     document.querySelector('#container').appendChild(div).appendChild(img)
 
-    img.onclick = function () { // Give the image a click function for the modal
-        document.querySelector("body").classList.add("stopScrolling")
-
-        modal.style.display = "block";
-        modal.style.overflow = "auto";
-        modalImg.src = this.src;
-        captionText.innerHTML = this.alt;
-    }
+    img.addEventListener('click', () => openModal())
 
     let artContainer = document.querySelector('.artPiece:last-child')
     artContainer.appendChild(h1)
@@ -126,16 +154,29 @@ function toggleSidebar(){
     sidebarOn = !sidebarOn
 
     if(sidebarOn){
-        document.querySelector(".galleryDark").style.display = "block"
+        // document.querySelector(".galleryDark").style.display = "block"
+        document.querySelector(".galleryDark").classList.add("fadeIn")
+        document.querySelector(".galleryDark").classList.remove("fadeOut")
         document.querySelector(".sidebar").classList.add("w3-animate-right")
         document.querySelector(".sidebar").classList.remove("w3-animate-left")
+        document.querySelector("body").classList.add("stopScrolling")
     }
     else{
-        document.querySelector(".galleryDark").style.display = "none"
+        // document.querySelector(".galleryDark").style.display = "none"
+        document.querySelector(".galleryDark").classList.add("fadeOut")
+        document.querySelector(".galleryDark").classList.remove("fadeIn")
         document.querySelector(".sidebar").classList.add("w3-animate-left")
         document.querySelector(".sidebar").classList.remove("w3-animate-right")
+        document.querySelector("body").classList.remove("stopScrolling")
     }
 }
+
+function getPos(el) {
+    var rect = el.getBoundingClientRect();
+    return {x:rect.left,y:rect.top};
+}
+
+
 
 // ------ BACK-END ------
 
@@ -302,11 +343,11 @@ let handleKeyDown = true
 let isHighlight = false // TODO use states?
 let sidebarOn = false
 
-// MODAL
-let modal = document.getElementById('myModal'); // Get the modal
-let modalImg = document.getElementById("img01"); // Get the image and insert it inside the modal 
-let captionText = document.getElementById("caption"); // Use its "alt" text as a caption
-let span = document.getElementsByClassName("close")[0]; // Get the <span> element that closes the modal
+// // MODAL
+// let modal = document.getElementById('myModal'); // Get the modal
+// let modalImg = document.getElementById("img01"); // Get the image and insert it inside the modal 
+// let captionText = document.getElementById("caption"); // Use its "alt" text as a caption
+// let span = document.getElementsByClassName("close")[0]; // Get the <span> element that closes the modal
 
 document.getElementById("myModal").addEventListener("click", function (e) {
     if (this === e.target) {
