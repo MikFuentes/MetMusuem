@@ -1,5 +1,4 @@
 :root {
-    --transition-sidebar: 0.4s;
     --font-responsive: 0.390625vw;
 }
 
@@ -34,7 +33,7 @@ body:first-child {
 }
 
 .topbar * {
-    /* background: blue; */
+    background: blue;
     margin: 10px;
 }
 

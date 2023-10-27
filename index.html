@@ -6,6 +6,8 @@
 	<meta name="viewport" content="width=device-width,initial-scale=1" />
 	<link href="index.css" rel="stylesheet" type="text/css">
 	<link href="styles/navigation_bar.css" rel="stylesheet" type="text/css">
+	<link href="styles/sidebar.css" rel="stylesheet" type="text/css">
+	<link href="styles/slider.css" rel="stylesheet" type="text/css">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
 	<link rel="preconnect" href="https://fonts.gstatic.com">
 	<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
@@ -16,7 +18,7 @@
 	<!-- Navigation Bar -->
 	<div class="topbar">
 		<!-- Hamburger & Web Name -->
-		<button class="iconButton" onClick="toggleSidebar()">
+		<button class="iconButton" id="hamburger" onClick="toggleSidebar()">
 			<i class="glyphicon glyphicon-menu-hamburger"></i>
 		</button>
 		
@@ -40,30 +42,24 @@
 	</div>
 
 	<!-- Page Content -->
+	<div class="galleryDark"></div>
 	<div class="gallery">
-		<div class="galleryDark"></div>
 		<div class="gallery-top">
 			<h3 class="searchHeader"></h3>
 			<!-- Rounded switch -->
 			<div class="highlight">
-				<p class="searchHeader">Highlight</p>
-				<label class="switch">
-					<input type="checkbox" onClick="highlight()">
-					<span class="slider round"></span>
-				</label>
+				<p>Highlight</p>
+				<div class = 'toggle-switch'>
+					<label>
+						<input type = 'checkbox'>
+						<span class = 'slider'></span>
+					</label>
+				</div>
 			</div>
 		</div>
-		
 		<p class="searchResult"></p>
 		<div id="container"></div>
 	</div>
-
-	<!-- The Modal -->
-	<div id="myModal" class="myModal">
-		<span class="close" onClick="closeModal()">&times;</span>
-		<img class="modal-content" id="img01">
-		<div id="caption"></div>
-	</div>	
 	<script src="./index.js"></script>
 </body>
 

@@ -1,5 +1,6 @@
 // const DATE = `2021-05-01`
 const DATE = `2023-10-21`
+const MAX_ART = 12
 
 // ------ FRONT-END -------
 // TODO:
@@ -37,40 +38,39 @@ function createModal(){
     let modal = document.createElement('div')
     modal.className = 'myModal'
     modal.id = 'myModal'
+    modal.style.display = "block";
+    modal.style.overflow = "auto";
+    modal.onclick = deleteModal
 
     let close = document.createElement('span')
     close.className = 'close'
-    close.addEventListener('click', () => closeModal())
+    close.innerHTML = "&times"
+    close.onclick = deleteModal
 
     let img = document.createElement('img')
     img.className = 'modal-content'
     img.id = 'img01'
+    img.src = this.src
 
     let caption = document.createElement('div')
     caption.id = 'caption'
+    caption.textContent = this.alt
     
     modal.append(close, img, caption)
-    return modal
-}
-
-// Opens the modal
-function openModal() {
-    document.querySelector("body").classList.add("stopScrolling")
-    let modal = createModal()
-
-    // let modal = document.getElementById('myModal'); 
-    modal.style.display = "block";
-    modal.style.overflow = "auto";
-    modal.img = this.src;
-    modal.caption = this.alt;
-
     document.body.append(modal)
+
+    document.querySelector("body").classList.add("stopScrolling")    
 }
 
 // Closes the modal
 function closeModal() {
+    let modal = document.getElementById('myModal'); 
     modal.style.display = "none";
     document.querySelector("body").classList.remove("stopScrolling")
+}
+
+function deleteModal() {
+    document.getElementById('myModal').remove()
 }
 
 // Adds the images to the HTML
@@ -87,22 +87,21 @@ function addImageToDocument(image, imageSmall, title, medium, artistDisplayName,
     img.src = imageSmall
     img.className = "myImg"
     img.alt = title + " | " + medium + " | " + artistDisplayName
-
+    img.onclick = createModal
+    
     let h1 = document.createElement('h1')
     h1.className = "artHeader"
     h1.innerHTML = title
-
+    
     let p1 = document.createElement('p')
     p1.className = "medium"
     p1.innerHTML = medium
-
+    
     let p2 = document.createElement('p')
     p2.className = "artist"
     p2.innerHTML = artistDisplayName + "<br>" + artistDisplayBio
-
+    
     document.querySelector('#container').appendChild(div).appendChild(img)
-
-    img.addEventListener('click', () => openModal())
 
     let artContainer = document.querySelector('.artPiece:last-child')
     artContainer.appendChild(h1)
@@ -152,23 +151,28 @@ async function addDepartmentsToDocument() {
 // Opens/closes the sidebar
 function toggleSidebar(){
     sidebarOn = !sidebarOn
+    let galleryDark = document.querySelector('.galleryDark')
+    let sidebar = document.querySelector('.sidebar')
+    let body = document.querySelector('body')
 
     if(sidebarOn){
-        // document.querySelector(".galleryDark").style.display = "block"
-        document.querySelector(".galleryDark").classList.add("fadeIn")
-        document.querySelector(".galleryDark").classList.remove("fadeOut")
-        document.querySelector(".sidebar").classList.add("w3-animate-right")
-        document.querySelector(".sidebar").classList.remove("w3-animate-left")
-        document.querySelector("body").classList.add("stopScrolling")
+        // galleryDark.style.display = "block"
+        galleryDark.classList.add("animate-fadeIn")
+        galleryDark.classList.remove("animate-fadeOut")
+        
+        sidebar.classList.add("animate-right")
+        sidebar.classList.remove("animate-left")
+        body.classList.add("stopScrolling")
     }
     else{
-        // document.querySelector(".galleryDark").style.display = "none"
-        document.querySelector(".galleryDark").classList.add("fadeOut")
-        document.querySelector(".galleryDark").classList.remove("fadeIn")
-        document.querySelector(".sidebar").classList.add("w3-animate-left")
-        document.querySelector(".sidebar").classList.remove("w3-animate-right")
-        document.querySelector("body").classList.remove("stopScrolling")
+        // galleryDark.style.display = "none"
+        galleryDark.classList.add("animate-fadeOut")
+        galleryDark.classList.remove("animate-fadeIn")
+        sidebar.classList.add("animate-left")
+        sidebar.classList.remove("animate-right")
+        body.classList.remove("stopScrolling")
     }
+    galleryDark.onclick = toggleSidebar
 }
 
 function getPos(el) {
@@ -225,7 +229,7 @@ async function request() {
         let departmentID = (department === null) ? '' : department.id
         let objects = await requestObjects(date, departmentID)
 
-        getTenArt(objects, true, 0)
+        getArt(objects, true, 0)
     }
     catch (error) {console.log(error)}
 }
@@ -238,7 +242,7 @@ async function search() {
         let departmentID = (department === null) ? '' : department.id
         let objects = await searchObjects(input, departmentID, isHighlight)
 
-        getTenArt(objects, false, 0, input) // TODO remove fourth parameter in getTenArt()
+        getArt(objects, false, 0, input) // TODO remove fourth parameter in getArt()
     }
     catch(error) {console.log(error)}
 }
@@ -248,7 +252,7 @@ async function filterObjects(list) {
     try {
         let objects = await Promise.all(list)
         for (let object of objects) {
-            if (counter >= 10) { break } // Break out of the for loop
+            if (counter >= MAX_ART) { break } // Break out of the for loop
             if (object.primaryImage === null || object.primaryImage === '') { continue } 
             if (isHighlight && object.isHighlight == false) { continue } // Filter for isHighlight
 
@@ -269,8 +273,8 @@ async function filterObjects(list) {
     return counter
 }
 
-// Gets 10 artworks
-function getTenArt(objectArray, isRandom, startIndex, query = "") {
+// Gets artworks
+function getArt(objectArray, isRandom, startIndex, query = "") {
     console.log("Loading...")
 
     // Exit if null
@@ -291,10 +295,9 @@ function getTenArt(objectArray, isRandom, startIndex, query = "") {
         objectIDs = objectIDs.sort((a, b) => a-b) // Ascending sort the array by index
     }
 
-    // Get 10 objects at a time...
     if (isRandom) {
         // Randomly
-        for (let i = 0; i < 10; i++) {
+        for (let i = 0; i < MAX_ART; i++) {
             if (listOfAllPromises.length >= MAX || startIndex >= MAX) { break }
             let rand = Math.floor(Math.random() * MAX) + 0
             object = requestObject(objectIDs[rand]) // Pending promises
@@ -304,7 +307,7 @@ function getTenArt(objectArray, isRandom, startIndex, query = "") {
     }
     else {
         // Sequentially
-        for (let i = 0; i < 10; i++) {
+        for (let i = 0; i < MAX_ART; i++) {
             if (listOfAllPromises.length >= MAX || startIndex >= MAX) { break }
             object = requestObject(objectIDs[startIndex]) // Pending promises
             listOfAllPromises.push(object)
@@ -314,8 +317,8 @@ function getTenArt(objectArray, isRandom, startIndex, query = "") {
 
     filterObjects(listOfAllPromises)
         .then(numObjects => {
-            if (numObjects < 10 && numObjects < MAX && startIndex < MAX) {
-                getTenArt(objectArray, isRandom, startIndex, query) // Recursively call the function
+            if (numObjects < MAX_ART && numObjects < MAX && startIndex < MAX) {
+                getArt(objectArray, isRandom, startIndex, query) // Recursively call the function
             }
             else {
                 console.log("Loading complete.")
@@ -349,13 +352,15 @@ let sidebarOn = false
 // let captionText = document.getElementById("caption"); // Use its "alt" text as a caption
 // let span = document.getElementsByClassName("close")[0]; // Get the <span> element that closes the modal
 
-document.getElementById("myModal").addEventListener("click", function (e) {
-    if (this === e.target) {
-        if (this.id === "myModal") {
-            closeModal()
-        }
-    }
-});
+// document.getElementById("myModal").addEventListener("click", function (e) {
+//     if (this === e.target) {
+//         if (this.id === "myModal") {
+//             closeModal()
+//         }
+//     }
+// });
+
+// document.querySelector("#hamburger").addEventListener('click', toggleSidebar)
 
 /*------DEFAULT LOAD------*/
 
@@ -365,7 +370,16 @@ addDepartmentsToDocument()
 document.querySelector(".searchHeader").innerHTML = "Recently Updated Artwork"
 document.querySelector('.searchResult').innerHTML = "Loading..."
 
-// Generate 10 random artworks
+// createModal()
+
+// Generate random artworks
 requestObjects(DATE)
-    .then((objects) => getTenArt(objects, true, 0))
+    .then((objects) => getArt(objects, true, 0))
     .catch((error) => console.error(error))
+
+// TO-DO:
+// - Modal: 
+//   - Create/delete modal or open/close modal?
+// - TopBar:
+//   - Rename to nav bar
+//   - Fix fullscreen not working
