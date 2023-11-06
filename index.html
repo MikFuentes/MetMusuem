@@ -8,7 +8,7 @@
 	<link href="styles/navigation_bar.css" rel="stylesheet" type="text/css">
 	<link href="styles/sidebar.css" rel="stylesheet" type="text/css">
 	<link href="styles/slider.css" rel="stylesheet" type="text/css">
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+	<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"> -->
 	<link rel="preconnect" href="https://fonts.gstatic.com">
 	<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
 	<title>MOMA Collection</title>
@@ -16,7 +16,7 @@
 
 <body>
 	<!-- Navigation Bar -->
-	<div class="topbar">
+	<div class="topbar sticky">
 		<!-- Hamburger & Web Name -->
 		<button class="iconButton" id="hamburger" onClick="toggleSidebar()">
 			<i class="glyphicon glyphicon-menu-hamburger"></i>
@@ -38,7 +38,13 @@
 	
 	<!-- Sidebar -->
 	<div class="sidebar" >
-		<h2>Departments</h2	>
+		<div class="sidebar-header sticky">
+			<button class="iconButton" id="hamburger" onClick="toggleSidebar()">
+				<i class="glyphicon glyphicon-menu-hamburger"></i>
+			</button>
+			<h2 >Departments</h2	>
+		</div>
+		<ul class="departments"></ul>
 	</div>
 
 	<!-- Page Content -->

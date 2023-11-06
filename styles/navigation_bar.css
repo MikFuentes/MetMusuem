@@ -2,33 +2,15 @@
     --font-responsive: 0.390625vw;
 }
 
-*,
-*::before,
-*::after {
-    box-sizing: border-box;
-}
-
-body,
-html {
-    height: 100%;
-    font-family: Helvetica, sans-serif;
-    display: flex;
-    flex-direction: column;
-}
-
-body:first-child {
-    border: 10px;
-}
-
 .topbar {
     display: flex;
     justify-content: space-evenly;
     align-items: center;
 
-    height: auto;
+    height: 9vw;
     background-color: #e4002b;
 
-    z-index: 3;
+    z-index: 1;
     padding: 5px 0;
 }
 
@@ -64,7 +46,7 @@ body:first-child {
 .iconButton {
     display: flex;
     border: none;
-    background-color: #e4002b;
+    background-color: orange;
     color: white;
     align-items: center;
     justify-content: center;

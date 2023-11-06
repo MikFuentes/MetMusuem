@@ -4,32 +4,46 @@
     --left-sidebar: calc(var(--size-sidebar)*-1);
 }
 
-*, *::before, *::after {
-    box-sizing: border-box;
-}
-
-body, html {
-    height: 100%;
-    font-family: Helvetica, sans-serif;
+.sidebar{
     display: flex;
     flex-direction: column;
-}
 
-.sidebar{
-    display: block;
     overflow: auto;
-    height: 90%;
+    height: 100%;
     width: fit-content;
-    margin: 5.5em 0 0 0;
+    /* margin: 5.5em 0 0 0; */
     background-color: #f2f2f2;
 
-    z-index: 2;
+    z-index: 3;
     position: fixed;
+    top: 0;
     left: var(--left-sidebar);
 }
 
-.sidebar h2{
-    margin-left: 4rem;
+.sidebar h2 {
+    margin: 1em;
+}
+
+.sidebar-header {
+    background-color: pink;
+    /* padding-left: 1em; */
+    margin: 0;
+    display: flex;
+    align-items: center;
+    height: 9vw;
+}
+
+.sticky {
+    position: sticky;
+    top: 0;
+}
+
+.departments {
+    margin: 0;
+    padding: 0;
+}
+.sidebar li{
+    list-style-type: none;
 }
 
 .sidebarButton{
@@ -37,7 +51,7 @@ body, html {
     width:100%;
     text-decoration: none;
     border-bottom: 1px solid #ccc!important;
-    padding: 1em 3em;
+    padding: 1em 1em;
     cursor: pointer;
     color:black;
 }

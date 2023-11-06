@@ -2,7 +2,7 @@
     --font-responsive: 0.390625vw;
     --size-sidebar: 400px;
     --left-sidebar: calc(var(--size-sidebar)*-1);
-    --opacity-scrim: 0.7;
+    --opacity-scrim: 0.8;
 }
 
 *, *::before, *::after {
@@ -10,14 +10,11 @@
 }
 
 body, html {
-    height: 100%;
+    /* height: 100%; */
     font-family: Helvetica, sans-serif;
-    display: flex;
-    flex-direction: column;
-}
-
-body:first-child {
-    border:10px;
+    /* display: flex; */
+    /* flex-direction: column; */
+    margin: 0;
 }
 
 .stopScrolling {
@@ -39,7 +36,7 @@ body:first-child {
 }
 
 .galleryDark{
-    z-index: 1;
+    z-index: 2;
     display: block; 
     visibility: hidden; /* Hidden by default */
     position: fixed; /* Stay in place */
@@ -126,28 +123,35 @@ body:first-child {
     background-color: rgba(0,0,0,var(--opacity-scrim)); /* Black w/ opacity */
 }
 
-/* Modal Content (image) */
+.myModal {
+    padding: 1em;
+}
+
 .modal-content {
+    display: flex;
+    flex-direction: column;
+    /* background-color: rgba(0,0,0,var(--opacity-scrim)); */
+}
+
+/* Modal Content (image) */
+.modal-image {
     margin: auto;
     display: block;
-    width: 80%;
-    max-width: 700px;
+    max-height: 100%;
+    align-self: center;
 }
 
 /* Caption of Modal Image */
-#caption {
+.modal-caption {
     margin: auto;
     display: block;
-    width: 80%;
-    max-width: 700px;
+    max-width: 100%;
     text-align: center;
     color: #ccc;
-    padding: 10px 0;
-    height: 150px;
 }
 
 /* Add Animation */
-.modal-content, #caption {  
+.modal-image, .modal-caption {  
     animation-name: zoom;
     animation-duration: 0.6s;
 }
@@ -177,7 +181,7 @@ body:first-child {
 
 /* 100% Image Width on Smaller Screens */
 @media only screen and (max-width: 700px){
-    .modal-content {
+    .modal-image {
         width: 100%;
     }
 }

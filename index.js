@@ -47,16 +47,21 @@ function createModal(){
     close.innerHTML = "&times"
     close.onclick = deleteModal
 
+    let modalContent = document.createElement('div')
+    modalContent.className = 'modal-content'
+    
     let img = document.createElement('img')
-    img.className = 'modal-content'
+    img.className = 'modal-image'
     img.id = 'img01'
     img.src = this.src
 
     let caption = document.createElement('div')
-    caption.id = 'caption'
+    caption.className = 'modal-caption'
     caption.textContent = this.alt
+
+    modalContent.append(img, caption)
     
-    modal.append(close, img, caption)
+    modal.append(close, modalContent)
     document.body.append(modal)
 
     document.querySelector("body").classList.add("stopScrolling")    
@@ -71,6 +76,7 @@ function closeModal() {
 
 function deleteModal() {
     document.getElementById('myModal').remove()
+    document.querySelector("body").classList.remove("stopScrolling")
 }
 
 // Adds the images to the HTML
@@ -115,6 +121,7 @@ async function addDepartmentsToDocument() {
     
     let array = await requestDepartments()
     for (let department of array.departments) {
+        let li = document.createElement('li')
         let a = document.createElement('a')
         
         a.className = "sidebarButton"
@@ -144,7 +151,8 @@ async function addDepartmentsToDocument() {
             }
             request()
         }
-        document.querySelector('.sidebar').appendChild(a)
+        li.append(a)
+        document.querySelector('.departments').appendChild(li)
     }
 }
 
@@ -162,6 +170,7 @@ function toggleSidebar(){
         
         sidebar.classList.add("animate-right")
         sidebar.classList.remove("animate-left")
+        
         body.classList.add("stopScrolling")
     }
     else{
