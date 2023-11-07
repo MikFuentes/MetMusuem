@@ -2,7 +2,9 @@
     --font-responsive: 0.390625vw;
     --size-sidebar: 400px;
     --left-sidebar: calc(var(--size-sidebar)*-1);
-    --opacity-scrim: 0.8;
+    --opacity-scrim: 0.85;
+    --transition-sidebar: 0.3s;
+    --width-slider: 60px;
 }
 
 *, *::before, *::after {
@@ -107,81 +109,4 @@ body, html {
 .artist {
     font-size: 1rem;
     word-wrap: normal;
-}
-
-/* The Modal (background) */
-.myModal {
-    display: none; /* Hidden by default */
-    position: fixed; /* Stay in place */
-    z-index: 4; /* Sit on top */
-    padding-top: 100px; /* Location of the box */
-    left: 0;
-    top: 0;
-    width: 100%; /* Full width */
-    height: 100%; /* Full height */
-    overflow: auto; /* Enable scroll if needed */
-    background-color: rgba(0,0,0,var(--opacity-scrim)); /* Black w/ opacity */
-}
-
-.myModal {
-    padding: 1em;
-}
-
-.modal-content {
-    display: flex;
-    flex-direction: column;
-    /* background-color: rgba(0,0,0,var(--opacity-scrim)); */
-}
-
-/* Modal Content (image) */
-.modal-image {
-    margin: auto;
-    display: block;
-    max-height: 100%;
-    align-self: center;
-}
-
-/* Caption of Modal Image */
-.modal-caption {
-    margin: auto;
-    display: block;
-    max-width: 100%;
-    text-align: center;
-    color: #ccc;
-}
-
-/* Add Animation */
-.modal-image, .modal-caption {  
-    animation-name: zoom;
-    animation-duration: 0.6s;
-}
-
-@keyframes zoom {
-    from {transform: scale(0.1)} 
-    to {transform: scale(1)}
-}
-
-/* The Close Button */
-.close {
-    position: absolute;
-    top: 15px;
-    right: 35px;
-    color: #f1f1f1;
-    font-size: 40px;
-    font-weight: bold;
-    transition: 0.3s;
-}
-
-.close:hover,
-.close:focus {
-    color: #bbb;
-    text-decoration: none;
-    cursor: pointer;
-}
-
-/* 100% Image Width on Smaller Screens */
-@media only screen and (max-width: 700px){
-    .modal-image {
-        width: 100%;
-    }
 }

@@ -1,13 +1,10 @@
-:root {
-    --font-responsive: 0.390625vw;
-}
-
 .topbar {
     display: flex;
     justify-content: space-evenly;
     align-items: center;
 
-    height: 9vw;
+    height: 9vh;
+    min-height: max-content;
     background-color: #e4002b;
 
     z-index: 1;

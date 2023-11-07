@@ -1,12 +1,3 @@
-:root {
-    --font-responsive: 0.390625vw;
-    --size-sidebar: 400px;
-    --left-sidebar: calc(var(--size-sidebar)*-1);
-    --opacity-scrim: 0.7;
-    --transition-slider: 0.3s;
-    --width-slider: 60px;
-}
-
 .highlight{
     display: flex;
     align-items: center;

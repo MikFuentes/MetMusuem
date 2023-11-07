@@ -34,7 +34,14 @@ function clearScreen() {
     counter = 0
 }
 
-function createModal(){
+function revealImage() {
+    let image = document.querySelector('.modal-content')
+    image.style.display = 'flex'
+    let spinner = document.querySelector('.spinner')
+    spinner.style.visibility = 'hidden';
+}
+
+function createModal(image, alt){
     let modal = document.createElement('div')
     modal.className = 'myModal'
     modal.id = 'myModal'
@@ -43,25 +50,41 @@ function createModal(){
     modal.onclick = deleteModal
 
     let close = document.createElement('span')
-    close.className = 'close'
+    close.className = 'modal-close'
     close.innerHTML = "&times"
     close.onclick = deleteModal
 
+    let svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+    svg.setAttribute("class", "spinner");
+    svg.setAttribute("viewBox", "0 0 50 50");
+
+    var circle = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+    circle.setAttribute("class", "path");
+    circle.setAttribute("cx", "25");
+    circle.setAttribute("cy", "25");
+    circle.setAttribute("r", "20");
+    circle.setAttribute("fill", "none");
+    circle.setAttribute("stroke-width", "5");
+
+    svg.appendChild(circle);
+
     let modalContent = document.createElement('div')
     modalContent.className = 'modal-content'
+    modalContent.style.display = 'none'
     
     let img = document.createElement('img')
     img.className = 'modal-image'
     img.id = 'img01'
-    img.src = this.src
+    img.src = image
+    img.onload = () => revealImage()
 
-    let caption = document.createElement('div')
+    let caption = document.createElement('p')
     caption.className = 'modal-caption'
-    caption.textContent = this.alt
+    caption.textContent = alt
 
     modalContent.append(img, caption)
     
-    modal.append(close, modalContent)
+    modal.append(close, svg, modalContent)
     document.body.append(modal)
 
     document.querySelector("body").classList.add("stopScrolling")    
@@ -90,10 +113,12 @@ function addImageToDocument(image, imageSmall, title, medium, artistDisplayName,
     div.className = "artPiece"
 
     let img = document.createElement('img')
+    // img.setAttribute('data-small-image', imageSmall)
     img.src = imageSmall
     img.className = "myImg"
     img.alt = title + " | " + medium + " | " + artistDisplayName
-    img.onclick = createModal
+    img.loading = 'lazy'
+    img.onclick = () => createModal(image, img.alt)
     
     let h1 = document.createElement('h1')
     h1.className = "artHeader"
