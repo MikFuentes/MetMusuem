@@ -9,7 +9,7 @@
 	<link href="styles/sidebar.css" rel="stylesheet" type="text/css">
 	<link href="styles/slider.css" rel="stylesheet" type="text/css">
 	<link href="styles/modal.css" rel="stylesheet" type="text/css">
-	<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"> -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
 	<link rel="preconnect" href="https://fonts.gstatic.com">
 	<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
 	<title>MOMA Collection</title>
@@ -17,7 +17,7 @@
 
 <body>
 	<!-- Navigation Bar -->
-	<div class="topbar sticky">
+	<div class="topbar">
 		<!-- Hamburger & Web Name -->
 		<button class="iconButton" id="hamburger" onClick="toggleSidebar()">
 			<i class="glyphicon glyphicon-menu-hamburger"></i>
@@ -29,7 +29,7 @@
 
 		<!-- Searchbar -->
 		<div class="searchbar">
-			<input id="myInput" onkeydown="onKeyDown(event)" onkeyup="onKeyUp(event)" placeholder="Search...">
+			<input id="myInput" onkeydown="onKeyDown(event)" placeholder="Search...">
 
 			<button class="iconButton" type="submit" id="search" onClick="search()">
 				<i class="glyphicon glyphicon-search"></i>
@@ -39,7 +39,7 @@
 	
 	<!-- Sidebar -->
 	<div class="sidebar" >
-		<div class="sidebar-header sticky">
+		<div class="sidebar-header">
 			<button class="iconButton" id="hamburger" onClick="toggleSidebar()">
 				<i class="glyphicon glyphicon-menu-hamburger"></i>
 			</button>
@@ -58,7 +58,7 @@
 				<p>Highlight</p>
 				<div class = 'toggle-switch'>
 					<label>
-						<input type = 'checkbox'>
+						<input type = 'checkbox' onClick="highlight()">
 						<span class = 'slider'></span>
 					</label>
 				</div>

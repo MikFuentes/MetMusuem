@@ -1,18 +1,21 @@
 .topbar {
     display: flex;
-    justify-content: space-evenly;
+    justify-content: space-around;
     align-items: center;
-
-    height: 9vh;
+    
+    position: sticky;
+    top: 0;
+    width: 100%;
+    height: var(--height-navbar);
     min-height: max-content;
-    background-color: #e4002b;
-
     z-index: 1;
-    padding: 5px 0;
+    /* padding: 5px 0; */
+
+    background-color: var(--color-primary);
 }
 
 .topbar * {
-    background: blue;
+    /* background: blue; */
     margin: 10px;
 }
 
@@ -23,7 +26,7 @@
     font-size: calc(28px + var(--font-responsive));
     font-weight: bold;
 
-    text-wrap: nowrap;
+    /* text-wrap: nowrap; */
 }
 
 .searchbar {
@@ -37,13 +40,13 @@
 
 #myInput {
     min-height: 30px;
-    min-width: 200px;
+    min-width: 250px;
 }
 
 .iconButton {
     display: flex;
     border: none;
-    background-color: orange;
+    background-color: var(--color-primary);
     color: white;
     align-items: center;
     justify-content: center;

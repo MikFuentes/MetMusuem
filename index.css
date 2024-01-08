@@ -1,10 +1,13 @@
 :root {
     --font-responsive: 0.390625vw;
-    --size-sidebar: 400px;
-    --left-sidebar: calc(var(--size-sidebar)*-1);
-    --opacity-scrim: 0.85;
-    --transition-sidebar: 0.3s;
+    --width-sidebar: 400px;
     --width-slider: 60px;
+    --height-navbar: 7.5vh;
+    --left-sidebar: calc(var(--width-sidebar)*-1);
+    --opacity-scrim: 0.85;
+    --color-primary: #e4002b;
+    --transition-sidebar: 0.3s;
+    --transition-slider: 0.3s;
 }
 
 *, *::before, *::after {
@@ -25,7 +28,7 @@ body, html {
 
 .gallery{
     /* padding: 5em 1em 0 1.5em; */
-    margin: 30px;
+    margin: 10px 30px;
 }
 .gallery .searchResult, .gallery-top{
     /* padding: 5em 1em 0 1.5em; */
@@ -34,7 +37,7 @@ body, html {
 }
 
 .searchResult{
-    margin-bottom: 0;
+    margin: 0 auto;
 }
 
 .galleryDark{
@@ -55,11 +58,12 @@ body, html {
     display:flex;
     justify-content: space-between;
     align-items: center;
-    background-color: pink;
+    /* background-color: pink; */
 }
 
 .gallery-top h3 {
     margin: 10px 0;
+    font-size: 3rem;
 }
 
 #container {
@@ -72,7 +76,8 @@ body, html {
     [four] 25%;
     
     /*SUPER IMPORTANT*/
-    align-items: flex-start; /*Aligns items at the start of the cross-axis*/
+    /*Aligns items at the start of the cross-axis*/
+    /* align-items: flex-start;  */
     flex-wrap: wrap;
 }
 
@@ -96,7 +101,7 @@ body, html {
 }
 
 .artHeader {
-    font-size: 2rem;
+    font-size: 2.5rem;
     word-wrap: normal;
 }
 
@@ -107,6 +112,6 @@ body, html {
 } 
 
 .artist {
-    font-size: 1rem;
+    font-size: 1.6rem;
     word-wrap: normal;
 }

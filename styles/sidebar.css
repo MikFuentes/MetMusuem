@@ -21,16 +21,18 @@
 .sidebar-header {
     background-color: pink;
     /* padding-left: 1em; */
-    margin: 0;
     display: flex;
     align-items: center;
-    height: 9vh;
+    
+    margin: 0;
+    position: sticky;
+    height: var(--height-navbar);
 }
 
-.sticky {
+/* .sticky {
     position: sticky;
     top: 0;
-}
+} */
 
 .departments {
     margin: 0;

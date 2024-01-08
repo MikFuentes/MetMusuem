@@ -1,21 +1,21 @@
 // const DATE = `2021-05-01`
 const DATE = `2023-10-21`
 const MAX_ART = 12
+const KEY_HANDLERS = {
+    Enter: search ,
+    Escape: deleteModal 
+}
 
 // ------ FRONT-END -------
 // TODO:
 // Make it responsive
 // Make department hamburger
 
-// Called when a key is pressed whilst using the search bar
-function onKeyDown(e) {
-    if (e.keyCode === 13) {
-        search()
-    }
-}
-
-// Called when a key is released whilst using the search bar
-function onKeyUp(e) {
+function onKeyDown(ev) {
+    console.log(ev)
+    if (ev.repeat) return
+    if (!(ev.key in KEY_HANDLERS)) return
+    KEY_HANDLERS[ev.key]()
 }
 
 // Called when the highlight checkbox is toggled
@@ -38,8 +38,10 @@ function revealImage() {
     let image = document.querySelector('.modal-content')
     image.style.display = 'flex'
     let spinner = document.querySelector('.spinner')
-    spinner.style.visibility = 'hidden';
+    spinner.style.display = 'none'
+    // spinner.style.visibility = 'hidden';
 }
+
 
 function createModal(image, alt){
     let modal = document.createElement('div')
@@ -47,7 +49,11 @@ function createModal(image, alt){
     modal.id = 'myModal'
     modal.style.display = "block";
     modal.style.overflow = "auto";
-    modal.onclick = deleteModal
+    modal.onclick = (ev) => { 
+        if (ev.target === ev.currentTarget) deleteModal()
+        if(ev.target.classList.contains('modal-content')) deleteModal()
+    }
+    document.onkeydown = onKeyDown
 
     let close = document.createElement('span')
     close.className = 'modal-close'
@@ -90,14 +96,10 @@ function createModal(image, alt){
     document.querySelector("body").classList.add("stopScrolling")    
 }
 
-// Closes the modal
-function closeModal() {
-    let modal = document.getElementById('myModal'); 
-    modal.style.display = "none";
-    document.querySelector("body").classList.remove("stopScrolling")
-}
+
 
 function deleteModal() {
+    document.onkeydown = ''
     document.getElementById('myModal').remove()
     document.querySelector("body").classList.remove("stopScrolling")
 }
@@ -274,6 +276,11 @@ async function search() {
         let input = document.querySelector('#myInput').value
         let department = document.querySelector(".active")
         let departmentID = (department === null) ? '' : department.id
+
+        if (input === "") {
+            request()
+            return
+        }
         let objects = await searchObjects(input, departmentID, isHighlight)
 
         getArt(objects, false, 0, input) // TODO remove fourth parameter in getArt()
@@ -310,6 +317,7 @@ async function filterObjects(list) {
 // Gets artworks
 function getArt(objectArray, isRandom, startIndex, query = "") {
     console.log("Loading...")
+    document.querySelector('.searchResult').innerHTML = "Loading..."
 
     // Exit if null
     if (objectArray.objectIDs === null) {
@@ -380,20 +388,6 @@ let handleKeyDown = true
 let isHighlight = false // TODO use states?
 let sidebarOn = false
 
-// // MODAL
-// let modal = document.getElementById('myModal'); // Get the modal
-// let modalImg = document.getElementById("img01"); // Get the image and insert it inside the modal 
-// let captionText = document.getElementById("caption"); // Use its "alt" text as a caption
-// let span = document.getElementsByClassName("close")[0]; // Get the <span> element that closes the modal
-
-// document.getElementById("myModal").addEventListener("click", function (e) {
-//     if (this === e.target) {
-//         if (this.id === "myModal") {
-//             closeModal()
-//         }
-//     }
-// });
-
 // document.querySelector("#hamburger").addEventListener('click', toggleSidebar)
 
 /*------DEFAULT LOAD------*/
@@ -402,9 +396,6 @@ let sidebarOn = false
 addDepartmentsToDocument()
 
 document.querySelector(".searchHeader").innerHTML = "Recently Updated Artwork"
-document.querySelector('.searchResult').innerHTML = "Loading..."
-
-// createModal()
 
 // Generate random artworks
 requestObjects(DATE)
