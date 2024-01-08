@@ -1,0 +1,60 @@
+.topbar {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    
+    position: sticky;
+    top: 0;
+    width: 100%;
+    height: var(--height-navbar);
+    min-height: max-content;
+    z-index: 1;
+    /* padding: 5px 0; */
+
+    background-color: var(--color-primary);
+}
+
+.topbar * {
+    /* background: blue; */
+    margin: 10px;
+}
+
+.webName {
+    color: white;
+    font-family: "Playfair Display";
+    /* font-size: large; */
+    font-size: calc(28px + var(--font-responsive));
+    font-weight: bold;
+
+    /* text-wrap: nowrap; */
+}
+
+.searchbar {
+    display: flex;
+    align-items: center;
+}
+
+.searchbar * {
+    margin: 0;
+}
+
+#myInput {
+    min-height: 30px;
+    min-width: 250px;
+}
+
+.iconButton {
+    display: flex;
+    border: none;
+    background-color: var(--color-primary);
+    color: white;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 15px;
+    margin: 0;
+}
+
+.glyphicon {
+    font-size: calc(26px + var(--font-responsive));
+    margin: 0;
+}
